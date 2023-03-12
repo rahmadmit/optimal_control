@@ -1,5 +1,6 @@
 #pragma once
 #include "RK4_Solver.h"
+#include <fstream>
 #include <tuple>
 
 using ClassicNewtonResponse = tuple<Matrix, Vector, Vector>;
@@ -26,6 +27,8 @@ const double T0 = 60 * 60 * 24 * 400.0;
 const double dx = 1E-6;
 
 Vector RK4(double psi_u_norm, double psi_v_norm, double psi_R_norm, double T_norm);
+
+void RK4_final_print(double psi_u_norm, double psi_v_norm, double psi_R_norm, double T_norm);
 
 Matrix form_residuals_matrix(double psi_u_norm, double psi_v_norm, double psi_R_norm, double T_norm);
 

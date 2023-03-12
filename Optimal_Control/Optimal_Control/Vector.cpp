@@ -121,12 +121,10 @@ Vector operator*(double mul, Vector v)
 ostream& operator<< (ostream & out, const Vector & v)
 {
 	// TODO: вставьте здесь оператор return
-	out << "[";
 	for (double i: v.num)
 	{
 		out << setw(20) << setprecision(10) << i;
 	}
-	out << "]";
 	return out;
 	 
 }
