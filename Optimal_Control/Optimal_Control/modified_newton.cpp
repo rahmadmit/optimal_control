@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "modified_newton.h"
 
-double local_norm(Matrix jacoby, Vector residuals)
+double local_norm(Matrix& jacoby, Vector& residuals)
 {
 	double n = 0.0;
 	int size = residuals.get_size();
@@ -18,13 +18,13 @@ double local_norm(Matrix jacoby, Vector residuals)
 	return sqrt(n);
 }
 
-double local_norm_func(Matrix m, Vector v)
+double local_norm_func(Matrix& m, Vector& v)
 {
 	Vector res = RK4(v(0), v(1), v(2), v(3));
 	return local_norm(m, res);
 }
 
-Vector GoldenSectionSearch(LocalNormFunc func, Matrix m, Vector left, Vector right, int iter_num)
+Vector GoldenSectionSearch(LocalNormFunc func, Matrix& m, Vector& left, Vector& right, int iter_num)
 {
 	double phi = (1 + sqrt(5)) / 2.0;
 	double r_phi = 2 - phi;
@@ -70,26 +70,7 @@ Vector modified_newton(double psi_u_norm, double psi_v_norm, double psi_R_norm, 
 	cout << "AFTER: " << classic_shooting_param << endl << "BASE RESID: " << base_resid << endl << "JACOBY: " << jacoby << endl << "Right Wing:" << b << endl;
 
 	Vector opt = GoldenSectionSearch(local_norm_func, jacoby, shooting_param, classic_shooting_param);
-	cout << opt << "   " << local_norm(jacoby, RK4(opt(0), opt(1), opt(2), opt(3))) << endl;
 	return opt;
 
-	Vector step = (classic_shooting_param - shooting_param) / 100.0;
-	double norm = local_norm(jacoby, base_resid);
-	cout << norm << endl;
-
-
-	for (int i = 1; i < 100; ++i)
-	{
-		Vector buff = shooting_param + step * i;
-		double based_norm = local_norm(jacoby, RK4(buff(0), buff(1), buff(2), buff(3)));
-		cout << i << "    " << based_norm << "\n";
-		if (norm < based_norm)
-		{
-			cout << i << endl;
-			return shooting_param + step * (i - 1);
-		}
-		norm = based_norm;
-	}
-	return classic_shooting_param;
 }
 
