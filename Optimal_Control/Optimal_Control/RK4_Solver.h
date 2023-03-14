@@ -19,6 +19,8 @@ public:
 	Vector nevyazki(double end, Vector nev); // возвращает только невязки
 	Matrix full_solve(double end); // возвращает полное решение
 
+	Matrix reverse_solve(double end, Vector fin);
+
 	~RK4_Solver();
 };
 

@@ -52,6 +52,27 @@ Matrix RK4_Solver::full_solve(double end)
 	return result;
 }
 
+Matrix RK4_Solver::reverse_solve(double end, Vector fin)
+{
+	int s = this->size;
+	Matrix result = Matrix(1001, s);
+	result(1000) = fin;
+	double h = 0.001;
+	for (int i = 999; i >= 0; i--)
+	{
+		Vector k1 = call(result(i + 1), end);
+		Vector k2 = call(result(i + 1) - h * k1 / 2.0, end);
+		Vector k3 = call(result(i + 1) - h * k2 / 2.0, end);
+		Vector k4 = call(result(i + 1) - h * k3, end);
+
+		Vector dy = h * (k1 + 2 * k2 + 2 * k3 + k4) / 6.0;
+
+		result(i) = result(i + 1) - dy;
+	}
+
+	return result;
+}
+
 RK4_Solver::~RK4_Solver()
 {
 }
