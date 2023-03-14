@@ -101,7 +101,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(U))
 
 ax.legend(["u - Прямой расчет", "u - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "U.png")
+plt.savefig("U.png")
 
 
 
@@ -126,7 +126,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(V))
 
 ax.legend(["v - Прямой расчет", "v - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "V.png")
+plt.savefig("V.png")
 
 
 
@@ -145,7 +145,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(R))
 
 ax.legend(["R - Прямой расчет", "R - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "R.png")
+plt.savefig("R.png")
 
 
 
@@ -164,7 +164,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(Phi))
 
 ax.legend(["Phi - Прямой расчет", "Phi - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "Phi.png")
+plt.savefig("Phi.png")
 
 
 
@@ -183,7 +183,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, -1900, 0, max_u + 850, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(Psi_u))
 
 ax.legend(["Psi_u - Прямой расчет", "Psi_u - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "Psi_u.png")
+plt.savefig("Psi_u.png")
 
 
 
@@ -206,7 +206,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(Psi_v))
 
 ax.legend(["Psi_v - Прямой расчет", "Psi_v - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "Psi_v.png")
+plt.savefig("Psi_v.png")
 
 
 
@@ -224,7 +224,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, 0, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.05*max(Psi_R))
 
 ax.legend(["Psi_R - Прямой расчет", "Psi_R - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "Psi_R.png")
+plt.savefig("Psi_R.png")
 
 
 
@@ -242,7 +242,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, -0.5, 0, max_u, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.1)
 
 ax.legend(["H - Прямой расчет", "H - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "H.png")
+plt.savefig("H.png")
 
 
 
@@ -262,7 +262,7 @@ ax.arrow(0, 0, 405, 0, width=0.017 / 2 * max_u, facecolor="black", edgecolor=Non
 ax.arrow(0, - max_u, 0, max_u + 10, width=405 * 0.01 / 2, facecolor="black", edgecolor=None, head_length=0.1)
 
 ax.legend(["Teta - Прямой расчет", "Teta - Обратной расчет"])
-plt.savefig(PATH_TO_DIRECT_DATA + "Teta.png")
+plt.savefig("Teta.png")
 
 
 
@@ -289,7 +289,7 @@ ax.plot(Earth_x, Earth_y, color="blue")
 ax.plot(x, y, color="black")
 
 ax.legend(["Солнце", "Марс", "Земля", "Траектория полета"])
-plt.savefig(PATH_TO_DIRECT_DATA + "trajectory.png")
+plt.savefig("trajectory.png")
 
 
 
@@ -340,4 +340,4 @@ anim = FuncAnimation(fig, animate, init_func=init,
                                frames=1001, interval=1, blit=True, repeat_delay=10)
  
 writergif = animation.PillowWriter(fps=20)
-anim.save(PATH_TO_DIRECT_DATA + 'trajectory.gif', writer=writergif)
+anim.save('trajectory.gif', writer=writergif)
