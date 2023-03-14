@@ -1,3 +1,6 @@
+from math import cos, pi, sin
+from matplotlib import animation
+from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -260,3 +263,81 @@ ax.arrow(0, - max_u, 0, max_u + 10, width=405 * 0.01 / 2, facecolor="black", edg
 
 ax.legend(["Teta - Прямой расчет", "Teta - Обратной расчет"])
 plt.savefig(PATH_TO_DIRECT_DATA + "Teta.png")
+
+
+
+Sun_X = [0] * 1001
+Sun_Y = [0] * 1001
+
+
+Mars_x = [R[1000] * cos(i * 2 * pi / 1000) for i in range(1001)]
+Mars_y = [R[1000] * sin(i * 2 * pi / 1000) for i in range(1001)]
+
+Earth_x = [R[0] * cos(i * 2 * pi / 1000) for i in range(1001)]
+Earth_y = [R[0] * sin(i * 2 * pi / 1000) for i in range(1001)]
+
+x = [R[i] * cos(Phi[i]) for i in range(1001)]
+y = [R[i] * sin(Phi[i]) for i in range(1001)]
+
+fig, ax = plt.subplots()
+
+ax.axis("equal")
+
+ax.plot(Sun_X, Sun_Y, marker="o", markersize=20, markeredgecolor="yellow", markerfacecolor="yellow")
+ax.plot(Mars_x, Mars_y, color="red")
+ax.plot(Earth_x, Earth_y, color="blue")
+ax.plot(x, y, color="black")
+
+ax.legend(["Солнце", "Марс", "Земля", "Траектория полета"])
+plt.savefig(PATH_TO_DIRECT_DATA + "trajectory.png")
+
+
+
+
+
+
+
+
+fig = plt.figure()
+ax = plt.axes(xlim=(-1.1*R[1000], 1.1*R[1000]), ylim=(-1.1*R[1000], 1.1*R[1000]))
+plt.axis("scaled")
+line, = ax.plot([], [], lw=1, color="black")
+line2, = ax.plot([], [], lw=1, color="blue")
+line3, = ax.plot([], [], lw=1, color="red")
+line5, = ax.plot([], [], marker="o", markersize=10, markeredgecolor="blue", markerfacecolor="blue")
+line6, = ax.plot([], [], marker="o", markersize=8, markeredgecolor="red", markerfacecolor="red")
+line4, = ax.plot([], [], marker="o", markersize=5, markeredgecolor="black", markerfacecolor="black")
+ 
+def init():
+    line.set_data([], [])
+    line2.set_data([], [])
+    line3.set_data([], [])
+    line4.set_data([], [])
+    line5.set_data([], [])
+    line6.set_data([], [])
+    return line, line2, line3, line5, line6, line4
+
+def animate(i):
+    a = [R[i] * cos(Phi[i])]
+    b = [R[i] * sin(Phi[i])]
+# 34945083/1000*(29.8*10^3/(149.6*10^9)))*(i-1
+    a_e = [R[0] * cos((34945083/1000*(29.8*10 ** 3/(149.6*10 ** 9)))*(i))]
+    b_e = [R[0] * sin((34945083/1000*(29.8*10 ** 3/(149.6*10 ** 9)))*(i))]
+
+    a_m = [R[1000] * cos((34945083/1000*(24.1*10 ** 3/(227.9*10 ** 9)))*(i) + 0.6152)]
+    b_m = [R[1000] * sin((34945083/1000*(24.1*10 ** 3/(227.9*10 ** 9)))*(i) + 0.6152)]
+
+    line.set_data(x, y,)
+    line2.set_data(Earth_x, Earth_y)
+    line3.set_data(Mars_x, Mars_y)
+    line5.set_data(a_e, b_e)
+    line4.set_data(a, b)
+    line6.set_data(a_m, b_m)
+    return line, line2, line3, line5, line6, line4
+
+
+anim = FuncAnimation(fig, animate, init_func=init,
+                               frames=1001, interval=1, blit=True, repeat_delay=10)
+ 
+writergif = animation.PillowWriter(fps=20)
+anim.save(PATH_TO_DIRECT_DATA + 'trajectory.gif', writer=writergif)
